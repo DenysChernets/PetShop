@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in</title>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200;1,600&display=swap"
+          rel="stylesheet">
+    <title>Register</title>
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="/images/logo.png" width="125px">
+            </div>
+            <nav>
+                <ul>
+                    <!--                    <a th:href="@{/login}" href="/login"><li sec:authorize="isAnonymous()" >Login</li></a>-->
+                    <li><a th:href="@{/home}" href="/home">Home</a></li>
+                    <li><a th:href="@{/about}" href="/about">About</a></li>
+                    <li><a th:href="@{/contact-us}" href="/#contact-us">Contact us</a></li>
+                    <li><a th:href="@{/user}" href="/user">Account</a></li>
+                </ul>
+
+            </nav>
+            <a th:href="@{/cart}">
+                <img src="/images/shopping-cart.png" width="30px" height="30px"></a>
+        </div>
+    </div>
+</div>
+<div class="register-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <img src="/images/mainpic.png" width="400px">
+            </div>
+            <div class="col-2">
+                <div class="form-container-reg">
+                    <form class="form-register" method="post" th:action="@{/register}" th:object="${userForm}">
+                        <h2>Register</h2>
+                        <p>
+                            <label for="username">Username<span>*</span></label>
+                            <input type="text" th:field="*{username}" id="username" name="username" autofocus placeholder="Username" required>
+                        </p>
+                        <p>
+                            <label for="email">Email<span>*</span></label>
+                            <input type="email" th:field="*{email}" id="email" name="email" autofocus placeholder="Email" required>
+                        </p>
+                        <p>
+                            <label for="password">Password<span>*</span></label>
+                            <input type="password" th:field="*{password}" id="password" name="password" autofocus placeholder="Password" required>
+                        </p>
+                        <p>
+                            <label for="Password confirm">Password confirm<span>*</span></label>
+                            <input type="password" th:field="*{passwordConfirm}" id="Password confirm" name="Password confirm" autofocus placeholder="Password confirm" required>
+                        </p>
+                        <p>
+                            <label for="firstname">First name<span>*</span></label>
+                            <input type="text" th:field="*{firstName}" id="firstName" name="firstName" autofocus placeholder="First Name" required>
+                        </p>
+                        <p>
+                            <label for="lastName">Last Name<span>*</span></label>
+                            <input type="text" th:field="*{lastName}" id="lastName" name="lastName" autofocus placeholder="Last Name" required>
+                        </p>
+                        <p>
+                            <label for="city">City</label>
+                            <input type="text" th:field="*{city}" id="city" name="city" autofocus placeholder="City">
+                        </p>
+                        <p>
+                            <label for="age">Age</label>
+                            <input type="number" th:field="*{age}" id="age" name="age" autofocus placeholder="Age">
+                        </p>
+                        <p>
+                            <label for="gender">Gender</label>
+                            <select th:field="*{gender}" id="gender" required name="gender">
+                                <option value="MALE">MALE</option>
+                                <option value="FEMALE">FEMALE</option>
+                            </select>
+                        </p><br>
+                        <button class="btn" type="submit">Register</button>
+                        <p class="no-account-text">Already have an account?<a th:href="@{/login}" class="no-account">Click
+                            here</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer"></div>
+</body>
+
+</html>
