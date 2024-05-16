@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>New age pets</title>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200;1,600&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="/images/logo.png" width="125px">
+            </div>
+            <div class="searchArea">
+                <form th:action="@{/products/search}">
+                    <button type="submit" tabindex="2">Search</button>
+                    <div class="inputDiv">
+                        <input type="text" name="search" id="inputField" tabindex="1" placeholder="Search here">
+                    </div>
+                </form>
+            </div>
+            <nav>
+                <ul>
+                    <li><a sec:authorize="isAnonymous()" th:href="@{/login}">
+                        <form th:action="@{/login}">
+                            <button class="login" type="submit">Log In</button>
+                        </form>
+                    </a></li>
+                    <li><a th:href="@{/home}" href="/home">Home</a></li>
+                    <span sec:authorize="!hasAuthority('users:write')">
+                    <li><a th:href="@{/about}" href="/about">About</a></li>
+                    <li><a th:href="@{/contact-us}" href="/contact-us">Contact us</a></li>
+                    <li><a th:href="@{/user}" href="/user">Account</a></li>
+                    </span>
+                    <li><a sec:authorize="isAuthenticated()" th:href="@{/login}">
+                        <form method="post" th:action="@{/logout}">
+                            <button class="logout" type="submit">Log Out</button>
+                        </form>
+                    </a></li>
+                </ul>
+            </nav>
+            <span sec:authorize="!hasAuthority('users:write')">
+            <a th:href="@{/cart}">
+                <img src="/images/shopping-cart.png" width="30px" height="30px"></a>
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <h1>Best pet Shop in Ukraine</h1>
+                <p>Lorem ipsum dolor sit amet,
+                    consectetur adipiscing elit,
+                    sed do eiusmod tempor <br>incididunt ut labore
+                    et dolore magna aliqua. At
+                    imperdiet dui accumsan sit.</p>
+                <a th:href="@{/products}" class="btn">Explore Now &#8594</a>
+            </div>
+            <div class="col-2">
+                <img src="/images/mainpic.png">
+            </div>
+        </div>
+    </div>
+</div>
+<!--Choosing categories-->
+<div class="categories">
+    <h2>Categories</h2>
+    <div class="small-container">
+        <div class="row">
+            <div th:each="category:${categories}" class="col-3">
+                <a th:href="@{/products/{category}(category=${category.categoryName})}">
+                    <img th:src="${category.getUrl()}">
+                    <h3 th:text="${category.getCategoryName()}"></h3>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Featuring products-->
+<div class="small-container">
+    <h2 class="title">Featured Products</h2>
+    <div class="row">
+        <div th:each="product:${products}" class="col-4">
+            <a th:href="@{/product/{id}(id=${product.id})}">
+                <img th:src="${product.getPictureUrl()}"></a>
+            <h4 th:text="${product.getName()}"></h4>
+            <p th:text="${product.getPrice()}+'&#36'"></p>
+        </div>
+    </div>
+</div>
+<!--Offer-->
+<div class="offer">
+    <div class="small-container">
+        <!--        <div class="row">-->
+        <!--            <div class="col-2">-->
+        <!--                <img th:src="${offerProduct.pictureUrl}" class="offer-img">-->
+        <!--            </div>-->
+        <!--            <div class="col-2">-->
+        <!--                <p>Exclusively Available on New Age Pets</p>-->
+        <!--                <h1 th:text="${offerProduct.name}"></h1>-->
+        <!--                <small th:text="${offerProduct.description}"></small><br>-->
+        <!--                <a th:href="@{/product/{id}(id=${offerProduct.id})}" class="btn">Buy Now &#8594;</a>-->
+        <!--            </div>-->
+    </div>
+</div>
+</div>
+<!--Footer-->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>Subscribe on my GitHub</h3>
+                <a href="https://github.com/Miracle225">https://github.com/Miracle225</a>
+            </div>
+            <div class="footer-col-2">
+                <img src="images/logo.png">
+                <p>Purpose of this site it is learning how to use Spring with
+                    Hibernate and Thymeleaf+HTML+CSS to build web app</p>
+            </div>
+            <div class="footer-col-3">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                </ul>
+            </div>
+            <div class="footer-col-4">
+                <h3>Contact Links</h3>
+                <ul>
+                    <li>Telegram</li>
+                    <li>Instagram</li>
+                    <li>Email</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">Copyright 2023 - New Age Pets</p>
+    </div>
+</div>
+</body>
+
+</html>
