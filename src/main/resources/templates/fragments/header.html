@@ -1,0 +1,42 @@
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="/images/logo.png" width="125px">
+            </div>
+            <div class="searchArea">
+                <form th:action="@{/products/search}">
+                    <button type="submit" tabindex="2">Search</button>
+                    <div class="inputDiv">
+                        <input type="text" name="search" id="inputField" tabindex="1" placeholder="Search here">
+                    </div>
+                </form>
+            </div>
+            <nav>
+                <ul>
+                    <li><a sec:authorize="isAnonymous()" th:href="@{/login}">
+                        <form th:action="@{/login}">
+                            <button class="login" type="submit">Log In</button>
+                        </form>
+                    </a></li>
+                    <li><a th:href="@{/home}" href="/home">Home</a></li>
+                    <span sec:authorize="!hasAuthority('users:write')">
+                    <li><a th:href="@{/about}" href="/about">About</a></li>
+                    <li><a th:href="@{/contact-us}" href="/#contact-us">Contact us</a></li>
+                    <li><a th:href="@{/user}" href="/user">Account</a></li>
+                    </span>
+                    <li><a sec:authorize="isAuthenticated()" th:href="@{/login}">
+                        <form method="post" th:action="@{/logout}">
+                            <button class="logout" type="submit">Log Out</button>
+                        </form>
+                    </a></li>
+                </ul>
+
+            </nav>
+            <span sec:authorize="!hasAuthority('users:write')">
+            <a th:href="@{/cart}">
+                <img src="/images/shopping-cart.png" width="30px" height="30px"></a>
+            </span>
+        </div>
+    </div>
+</div>
