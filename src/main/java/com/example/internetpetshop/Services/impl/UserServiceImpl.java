@@ -44,19 +44,19 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-//    @Override
-//    public void login(String username, String password) {
-//        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-//        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
-//        authenticationManager.authenticate(token);
-//
-//        if (token.isAuthenticated()) {
-//            SecurityContextHolder.getContext().setAuthentication(token);
-//            logger.debug(String.format("User %s logged in successfully!", username));
-//        } else {
-//            logger.error(String.format("Error with %s authentication!", username));
-//        }
-//    }
+  @Override
+    public void login(String username, String password) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+        authenticationManager.authenticate(token);
+
+        if (token.isAuthenticated()) {
+            SecurityContextHolder.getContext().setAuthentication(token);
+            logger.debug(String.format("User %s logged in successfully!", username));
+        } else {
+            logger.error(String.format("Error with %s authentication!", username));
+        }
+    }
 
     @Override
     public User findByUserName(String username) {
