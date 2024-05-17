@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface UserService {
     void save(User user);
 
-   // void login(String username, String password);
+    void login(String username, String password);
 
     User findByUserName(String username);
 
