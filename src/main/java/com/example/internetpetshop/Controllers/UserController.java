@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 
@@ -28,5 +30,24 @@ public class UserController {
             return "error";
         }
         return "account";
+    }
+    @GetMapping("/user/edit")
+    public String editUserForm(Principal principal, Model model) {
+        model.addAttribute("user", userService.findByUserName(principal.getName()));
+        return "edit_user";
+    }
+
+    @PostMapping("/user")
+    public String updateUser(Principal principal, @ModelAttribute("user") User user) {
+        User existingUser = userService.findByUserName(principal.getName());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setCity(user.getCity());
+        existingUser.setBalance(user.getBalance());
+        existingUser.setGender(user.getGender());
+        userService.editUser(existingUser);
+
+        return "redirect:/home";
     }
 }
