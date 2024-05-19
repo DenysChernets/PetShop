@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in</title>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200;1,600&display=swap"
+          rel="stylesheet">
+    <title>Register</title>
+</head>
+<body>
+<div th:replace="fragments/header"></div>
+<div class="register-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <img src="/images/mainpic.png" width="400px">
+            </div>
+            <div class="col-2">
+                <div class="form-container-edit">
+                    <form class="form-register" method="post" th:action="@{/user}" th:object="${user}">
+                        <h2>Edit profile</h2>
+                        <p>
+                            <label for="email">Email<span>*</span></label>
+                            <input type="email" th:field="*{email}" id="email" name="email" autofocus placeholder="Email">
+                        </p>
+                        <p>
+                            <label>First name<span>*</span></label>
+                            <input type="text" th:field="*{firstName}" name="firstName" autofocus placeholder="First Name">
+                        </p>
+                        <p>
+                            <label>Last Name<span>*</span></label>
+                            <input type="text" th:field="*{lastName}" name="lastName" autofocus placeholder="Last Name">
+                        </p>
+                        <p>
+                            <label>City</label>
+                            <input type="text" th:field="*{city}" name="city" autofocus placeholder="City">
+                        </p>
+                        <p>
+                            <label>Age</label>
+                            <input type="number" th:field="*{age}" name="age" autofocus placeholder="Age">
+                        </p>
+                        <p>
+                            <label>Gender</label>
+                            <select th:field="*{gender}" name="gender">
+                                <option value="MALE">MALE</option>
+                                <option value="FEMALE">FEMALE</option>
+                            </select>
+                        </p>
+                        <br>
+                        <button class="btn" type="submit">Edit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer"></div>
+</body>
+
+</html>
