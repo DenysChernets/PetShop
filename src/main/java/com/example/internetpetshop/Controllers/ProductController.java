@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -49,6 +52,13 @@ public class ProductController {
         return "product";
     }
 
+    @RequestMapping("/products/search")
+    public String getSearchProds(@RequestParam("search") String searchTemplate, Model model){
+        List<Product> foundProds = productService.findAllBySearchKey(searchTemplate);
+        model.addAttribute("searchQuery", searchTemplate);
+        model.addAttribute("foundProds", foundProds);
+        return "search-products";
+    }
     private List<Product> getFourProdForCategory(String category) {
         int i = 4;
         List<Product> products = productService.findAll();
