@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>All products - New age pets</title>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200;1,600&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+<div th:replace="fragments/header"></div>
+<!--All products-->
+<div class="small-container">
+    <div class="row row-2">
+        <h2 th:text="'Some products for you query: '+${searchQuery}">Found products</h2>
+    </div>
+    <div class="small-container">
+        <div class="row">
+            <div th:each="product:${foundProds}" class="col-4">
+                <a th:href="@{/product/{id}(id=${product.id})}">
+                    <img th:src="${product.getPictureUrl()}"></a>
+                <h4 th:text="${product.getName()}"></h4>
+                <p th:text="${product.getPrice()}+'&#36'"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments/footer"></div>
+</body>
+
+</html>
