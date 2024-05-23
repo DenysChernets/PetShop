@@ -59,6 +59,13 @@ public class ProductController {
         model.addAttribute("foundProds", foundProds);
         return "search-products";
     }
+
+    @GetMapping("products/{category}")
+    public String getCategoryProducts(@PathVariable String category, Model model) {
+        model.addAttribute("categoryProducts", getAllProductsByCategory(category));
+        model.addAttribute("category", category);
+        return "category-products";
+    }
     private List<Product> getFourProdForCategory(String category) {
         int i = 4;
         List<Product> products = productService.findAll();
@@ -77,4 +84,8 @@ public class ProductController {
     private List<Product> getAllProducts() {
         return productService.findAll();
     }
+    private List<Product> getAllProductsByCategory(String name) {
+        return productService.findAllByCategoryName(name);
+    }
+
 }
