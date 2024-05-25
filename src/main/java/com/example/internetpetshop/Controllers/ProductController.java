@@ -29,7 +29,7 @@ public class ProductController {
     @Autowired
     public ProductController(ProductService productService,
                              ProductValidator productValidator,
-                             CategoryService categoryService) {
+                             CategoryService categoryService){
         this.productService = productService;
         this.productValidator = productValidator;
         this.categoryService = categoryService;
